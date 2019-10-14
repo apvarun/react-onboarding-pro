@@ -11,3 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.container {
+  text-align: center;
+  padding: 40px;
+}
+
+.container button {
+  padding: 10px;
+  border-radius: 5px;
+  transition: 200ms ease-in all;
+  outline: none;
+}
+
+.container button:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+}
