@@ -6,7 +6,7 @@ import "./ReactOnboardingPro.css"
 const OnboardingStep = ({step, isActive, displayNext, goToNextStep, displayFinish}) => {
 
   if(!isActive) return null;
-  
+
   return (
     <div className="rop-step">
       {step.title && <div className="rop-title">{step.title}</div>}
@@ -21,9 +21,9 @@ const OnboardingStep = ({step, isActive, displayNext, goToNextStep, displayFinis
 
 const renderOnboardingPopup = (config) => (
   <>
-    <div className="react-onboarding-pro-blur-background full-screen" />
-    <OnboardingSteps>
-      {config.map((step,index) => <OnboardingStep step={step} key={index} />)}
+    <div className="react-onboarding-pro-blur-background full-screen"/>
+    <OnboardingSteps onClickOutside={config.overlayClose && removeContainerElement}>
+      {config.steps.map((step,index) => <OnboardingStep step={step} key={index} />)}
     </OnboardingSteps>
   </>
 );
@@ -48,7 +48,7 @@ const removeContainerElement = () => {
 }
 
 const reactOnboardingPro = (config) => {
-  if(!Array.isArray(config) || !config.length) {
+  if(!Array.isArray(config.steps) || !config.steps.length) {
     console.error('Invalid configuration for Onboarding')
   }
   const container = createContainerElement();

@@ -4,16 +4,19 @@ import reactOnboardingPro from '../lib';
 const App = () => {
  
   const showOnboarding = () => {
-    const config = [
-      {
-        title: 'Welcome to the platform',
-        description: 'Navigate around the UI to start using it'
-      },
-      {
-        title: 'Add your institution details',
-        description: 'We use this information to uniquely identify your insititution'
-      },
-    ];
+    const config = {
+      steps: [
+        {
+          title: 'Welcome to the platform',
+          description: 'Navigate around the UI to start using it'
+        },
+        {
+          title: 'Add your profile details',
+          description: 'We use this information in order to tailor your experience'
+        },
+      ],
+      overlayClose: false
+    };
     reactOnboardingPro(config);
   }
   return (

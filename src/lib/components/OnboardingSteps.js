@@ -32,7 +32,13 @@ class OnboardingSteps extends React.Component {
       });
     });
 
-    return <div className="react-onboarding-pro-popup-container full-screen">{children}</div>;
+    const clickOutsideFn = this.props.onClickOutside || null;
+
+    return (
+      <div className="react-onboarding-pro-popup-container full-screen" onClick={clickOutsideFn}>
+        {children}
+      </div>
+    );
   }
 }
 
