@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import { render } from 'react-dom';
-import { OnboardingSteps } from "./OnboardingSteps";
-import "./ReactOnboardingPro.css"
+import React, { useState } from "react"; 
+import { removeContainerElement } from "../utils/removeContainer";
 
-const OnboardingStep = ({ step, isActive, displayNext, goToNextStep, displayFinish }) => {
+export const OnboardingStep = ({ step, isActive, displayNext, goToNextStep, displayFinish }) => {
 
   let defaultButtonState = false;
   if (step.type === 'form') {
@@ -110,80 +108,3 @@ const OnboardingStep = ({ step, isActive, displayNext, goToNextStep, displayFini
     </div>
   )
 }
-
-const renderOnboardingPopup = (config) => (
-  <>
-    <div className="react-onboarding-pro-blur-background full-screen" />
-    <OnboardingSteps onClickOutside={config.overlayClose && removeContainerElement}>
-      {config.steps.map((step, index) => <OnboardingStep step={step} key={index} />)}
-    </OnboardingSteps>
-  </>
-);
-
-const CONTAINER_CLASS = 'react-onboarding-pro-container';
-
-const createContainerElement = () => {
-  let containerDiv = document.querySelector(`.${CONTAINER_CLASS}`);
-  if (containerDiv) {
-    return containerDiv;
-  }
-  containerDiv = document.createElement('div');
-  containerDiv.classList.add(CONTAINER_CLASS);
-  containerDiv.classList.add('full-screen');
-  document.body.append(containerDiv);
-  return containerDiv;
-}
-
-const removeContainerElement = () => {
-  let containerDiv = document.querySelector(`.${CONTAINER_CLASS}`);
-  containerDiv.remove();
-}
-
-const defaultStepConfig = {
-  title: '',
-  description: '',
-  type: '',
-  component: null,
-  fields: [],
-  onSubmit: () => {}
-}
-
-const defaultFieldConfig = {
-  label: '',
-  name: '',
-  type: '',
-  placeholder: '',
-  validation: ''
-}
-
-const addDefaults = (config) => {
-  config.steps = config.steps.map(step => {
-    return Object.assign(
-      {},
-      defaultStepConfig,
-      step,
-      {
-        fields: (step.fields || []).map(field => {
-          return Object.assign(
-            {},
-            defaultFieldConfig,
-            field
-          )
-        })
-      }
-    )
-  });
-  return config;
-}
-
-const reactOnboardingPro = (config) => {
-  if (!Array.isArray(config.steps) || !config.steps.length) {
-    console.error('Invalid configuration for Onboarding')
-  }
-  const container = createContainerElement();
-
-  const configWithDefaults = addDefaults(config);
-  render(renderOnboardingPopup(configWithDefaults), container);
-};
-
-export default reactOnboardingPro;
