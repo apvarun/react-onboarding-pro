@@ -1,8 +1,15 @@
 import React from 'react';
 import reactOnboardingPro from '../lib';
 
+const CustomComponent = ({ disable, setButtonState }) => (
+  <div>
+    <p>I'm a custom CustomComponent</p>
+    <button onClick={() => setButtonState(!disable)}>Toggle button</button>
+  </div>
+)
+
 const App = () => {
- 
+
   const showOnboarding = () => {
     const submitName = (formData) => {
       console.log('Name details submitted.')
@@ -39,6 +46,10 @@ const App = () => {
             },
           ],
           onSubmit: submitName
+        },
+        {
+          type: 'component',
+          component: CustomComponent
         }
       ],
       overlayClose: false
