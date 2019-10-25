@@ -1,12 +1,19 @@
 import React from 'react';
-import reactOnboardingPro from '../lib';
+import Onboarding from '../lib';
 
-const CustomComponent = ({ disable, setButtonState }) => (
-  <div>
-    <p>I'm a custom CustomComponent</p>
-    <button onClick={() => setButtonState(!disable)}>Toggle button</button>
-  </div>
-)
+const CustomComponent = ({ disable, setButtonState, setOnSubmit }) => {
+
+  setOnSubmit(() => {
+    console.log('Custom component action completed');
+  });
+  
+  return (
+    <div>
+      <p>I'm a custom CustomComponent</p>
+      <button onClick={() => setButtonState(!disable)}>Toggle button</button>
+    </div>
+  )
+}
 
 const App = () => {
 
@@ -54,7 +61,7 @@ const App = () => {
       ],
       overlayClose: false
     };
-    reactOnboardingPro(config);
+    Onboarding(config);
   }
   return (
     <div className="container">

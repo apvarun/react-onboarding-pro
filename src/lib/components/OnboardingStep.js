@@ -1,9 +1,10 @@
-import React, { useState } from "react"; 
+import React, { useState } from "react";
 import { removeContainerElement } from "../utils/removeContainer";
 
 export const OnboardingStep = ({ step, isActive, displayNext, goToNextStep, displayFinish }) => {
 
-  let defaultButtonState = false;
+  let defaultButtonState = false,
+    onSubmitCallback = null;
   if (step.type === 'form') {
     defaultButtonState = step.fields.reduce((acc, field) => {
       return Boolean(acc | !!field.validation);
@@ -41,6 +42,14 @@ export const OnboardingStep = ({ step, isActive, displayNext, goToNextStep, disp
       step.onSubmit(formData);
       defaultButtonFunction();
     }
+  } else if (step.type === 'component') {
+    const defaultButtonFunction = buttonFunction;
+    buttonFunction = () => {
+      if (onSubmitCallback) {
+        onSubmitCallback();
+      }
+      defaultButtonFunction();
+    }
   }
 
   const validateForm = (name, value) => {
@@ -76,9 +85,13 @@ export const OnboardingStep = ({ step, isActive, displayNext, goToNextStep, disp
     })
   }
 
-  let CustomComponent = () => <></>;
+  let CustomComponent = null;
   if (step.type === 'component' && step.component) {
     CustomComponent = step.component;
+  }
+
+  const setOnSubmit = (onSubmit) => {
+    onSubmitCallback = onSubmit;
   }
 
   return (
@@ -101,7 +114,7 @@ export const OnboardingStep = ({ step, isActive, displayNext, goToNextStep, disp
           )
         }
       </form>}
-      <CustomComponent disable={form.invalid} setButtonState={setButtonState} />
+      {CustomComponent && <CustomComponent disable={form.invalid} setButtonState={setButtonState} setOnSubmit={setOnSubmit} />}
       <div className="rop-button-container">
         <button className="rop-button" onClick={buttonFunction} disabled={form.invalid}>{buttonText}</button>
       </div>

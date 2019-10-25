@@ -97,6 +97,20 @@ Allows you to show your custom component with your own styling
 }
 ```
 
+In case, any custom action (like a POST request) has to be taken when the step is being completed, the custom component needs to provide the onSubmit callback function.
+
+```js
+const onSubmitCallback = () => {
+  console.log('Custom component action completed');
+};
+
+...
+
+setOnSubmit(onSubmitCallback);
+```
+
+This can be done from functional component during initialization or from any lifecycles in class based component (except from componentDidUnmount).
+
 
 ## License
 
