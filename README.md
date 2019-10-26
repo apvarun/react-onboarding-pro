@@ -2,9 +2,17 @@
 
 Onboarding flow for reducing friction to use the application and improving the workflow
 
+![npm](https://img.shields.io/npm/v/react-onboarding-pro) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-onboarding-pro) ![NPM](https://img.shields.io/npm/l/react-onboarding-pro)
+
 - Highly Customizable
 - Support for forms in the popups to collect information from user
 - Ability to display custom components
+
+## Preview
+
+![Preview of React Onboarding Pro](./preview.png)
+
+**[DEMO](https://codesandbox.io/s/react-onboarding-pro-example-y16pn)**
 
 ## Install
 
