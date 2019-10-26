@@ -12,16 +12,14 @@
   top: 0;
   left: 0;
   z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .react-onboarding-pro-blur-background {
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
   transition: 200ms ease-in-out all;
-}
-.react-onboarding-pro-popup-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .rop-step {
   width: calc(100% - 20px);
@@ -102,7 +100,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .react-onboarding-pro-popup-container {
+  .react-onboarding-pro-container {
     align-items: flex-end;
   }
 }

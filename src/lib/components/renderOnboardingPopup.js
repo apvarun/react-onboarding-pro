@@ -5,8 +5,11 @@ import { removeContainerElement } from "../utils/removeContainer";
 
 export const renderOnboardingPopup = (config) => (
   <>
-    <div className="react-onboarding-pro-blur-background full-screen" />
-    <OnboardingSteps onClickOutside={config.overlayClose && removeContainerElement}>
+    <div
+      className="react-onboarding-pro-blur-background full-screen"
+      onClick={config.overlayClose ? removeContainerElement : undefined}
+    />
+    <OnboardingSteps>
       {config.steps.map((step, index) => <OnboardingStep step={step} key={index} />)}
     </OnboardingSteps>
   </>
