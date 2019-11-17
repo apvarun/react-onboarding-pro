@@ -211,7 +211,8 @@ module.exports = function(webpackEnv) {
       globalObject: 'this',
     },
     optimization: {
-      minimize: (isEnvDemo || isEnvProduction), // CRL
+      // DISABLE MINIMIZER UNTIL TERSER keep_fnames ISSUE IS FIXED
+      minimize: false, //(isEnvDemo || isEnvProduction), // CRL
       minimizer: [
         // This is only used in production mode
         new TerserPlugin({
