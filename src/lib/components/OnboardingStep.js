@@ -3,12 +3,21 @@ import { removeContainerElement } from "../utils/removeContainer";
 
 export const OnboardingStep = ({ step, isActive, displayNext, goToNextStep, displayFinish }) => {
 
+  const validateFields = () => {
+    return !step.fields.reduce((valid, field) => {
+      if (!field.validation) {
+        return valid & true;
+      }
+      return valid & RegExp(field.validation, 'gm').test(field.value);
+    }, true)
+  }
+
   let defaultButtonState = false,
-    onSubmitCallback = null;
+    onSubmitCallback = () => {
+      // This function will be replaced by a custom function
+    };
   if (step.type === 'form') {
-    defaultButtonState = step.fields.reduce((acc, field) => {
-      return Boolean(acc | !!field.validation);
-    }, false);
+    defaultButtonState = step.fields.length === 0 ? false: validateFields();
   } else if (step.type === 'component') {
     defaultButtonState = true;
   }
@@ -18,7 +27,7 @@ export const OnboardingStep = ({ step, isActive, displayNext, goToNextStep, disp
       {
         invalid: defaultButtonState
       },
-      ...step.fields.map(field => ({ [field.name]: '' }))
+      ...step.fields.map(field => ({ [field.name]: field.value || '' }))
     )
   )
 
@@ -109,6 +118,7 @@ export const OnboardingStep = ({ step, isActive, displayNext, goToNextStep, disp
                 name={field.name}
                 placeholder={field.placeholder}
                 onChange={updateForm}
+                value={form[field.name]}
               />
             </div>
           )

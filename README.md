@@ -114,11 +114,12 @@ const onSubmitCallback = () => {
 
 ...
 
-setOnSubmit(onSubmitCallback);
+setOnSubmit(onSubmitCallback); // This function will be made available in Component's props
 ```
 
 This can be done from functional component during initialization or from any lifecycles in class based component (except from componentDidUnmount).
 
+In order to enable the onboarding flow's next/finish button, `setButtonState` can be used. Calling it with a true will enable it. This is handy when custom UI validation needs to be added before submitting the form.
 
 ## License
 

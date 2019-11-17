@@ -42,14 +42,16 @@ const App = () => {
               name: 'first_name',
               type: 'text',
               placeholder: 'John',
-              validation: '[a-zA-Z]'
+              validation: '[a-zA-Z]',
+              value: 'John'
             },
             {
               label: 'Last Name',
               name: 'last_name',
               type: 'text',
               placeholder: 'Doe',
-              validation: ''
+              validation: '',
+              value: 'Doe'
             },
           ],
           onSubmit: submitName
