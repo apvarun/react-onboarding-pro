@@ -17,7 +17,7 @@ export const OnboardingStep = ({ step, isActive, displayNext, goToNextStep, disp
       // This function will be replaced by a custom function
     };
   if (step.type === 'form') {
-    defaultButtonState = step.fields.length === 0 ? false: validateFields();
+    defaultButtonState = step.fields.length === 0 ? false : validateFields();
   } else if (step.type === 'component') {
     defaultButtonState = true;
   }
@@ -124,7 +124,11 @@ export const OnboardingStep = ({ step, isActive, displayNext, goToNextStep, disp
           )
         }
       </form>}
-      {CustomComponent && <CustomComponent disable={form.invalid} setButtonState={setButtonState} setOnSubmit={setOnSubmit} />}
+      {CustomComponent && <CustomComponent
+        disable={form.invalid}
+        setButtonState={setButtonState}
+        setOnSubmit={setOnSubmit}
+        {...step.props} />}
       <div className="rop-button-container">
         <button className="rop-button" onClick={buttonFunction} disabled={form.invalid}>{buttonText}</button>
       </div>

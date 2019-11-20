@@ -4,6 +4,7 @@ export const DEFAULT_STEP_CONFIG = {
   description: '',
   type: '',
   component: null,
+  props: {},
   fields: [],
   onSubmit: () => { }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import Onboarding from '../lib';
 
-const CustomComponent = ({ disable, setButtonState, setOnSubmit }) => {
+const CustomComponent = ({ disable, setButtonState, setOnSubmit, ...props }) => {
 
   setOnSubmit(() => {
     console.log('Custom component action completed');
@@ -9,7 +9,7 @@ const CustomComponent = ({ disable, setButtonState, setOnSubmit }) => {
   
   return (
     <div>
-      <p>I'm a custom CustomComponent</p>
+      <p>I'm a custom CustomComponent with id {props.id}</p>
       <button onClick={() => setButtonState(!disable)}>Toggle button</button>
     </div>
   )
@@ -58,7 +58,10 @@ const App = () => {
         },
         {
           type: 'component',
-          component: CustomComponent
+          component: CustomComponent,
+          props: {
+            id: 100,
+          }
         }
       ],
       overlayClose: false
